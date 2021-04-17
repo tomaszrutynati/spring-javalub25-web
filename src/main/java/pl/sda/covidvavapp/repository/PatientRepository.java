@@ -25,7 +25,6 @@ public class PatientRepository {
         patients.removeIf(pat -> pat.getId().equals(id));
     }
 
-
     public void create(PatientEntity patient) {
         patient.setId(++PATIENT_ID);
 

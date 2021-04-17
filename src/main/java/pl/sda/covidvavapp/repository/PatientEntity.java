@@ -1,7 +1,6 @@
 package pl.sda.covidvavapp.repository;
 
 import lombok.*;
-import pl.sda.covidvavapp.api.model.Vaccination;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -16,5 +15,11 @@ public class PatientEntity {
     private String firstName;
     private String lastName;
     private String pesel;
-    private Set<Vaccination> vaccinations = new HashSet<>();
+    private Set<VaccinationEntity> vaccinations = new HashSet<>();
+
+    public PatientEntity updatePatient(String newFirstName, String newLastName) {
+        this.firstName = newFirstName;
+        this.lastName = newLastName;
+        return this;
+    }
 }
