@@ -10,6 +10,7 @@ import pl.sda.covidvavapp.repository.PatientEntity;
 import pl.sda.covidvavapp.repository.PatientRepository;
 import pl.sda.covidvavapp.repository.VaccinationEntity;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -24,6 +25,7 @@ public class PatientService {
                 .firstName(newPatient.getFirstName())
                 .lastName(newPatient.getLastName())
                 .pesel(newPatient.getPesel())
+                .vaccinations(new HashSet<>())
                 .build();
         patientRepository.create(entity);
     }
@@ -31,7 +33,7 @@ public class PatientService {
     public void updatePatient(UpdatePatient updatePatient) {
         patientRepository.getById(updatePatient.getId())
                 .map(pat -> pat.updatePatient(updatePatient.getFirstName(), updatePatient.getLastName()))
-                .ifPresent(pat -> patientRepository.create(pat));
+                .orElseThrow(() -> new IllegalStateException("Patient doesn't exist"));
     }
 
     public Patient getPatient(Long id) {
