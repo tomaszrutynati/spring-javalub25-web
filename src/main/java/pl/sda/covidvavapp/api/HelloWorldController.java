@@ -2,23 +2,29 @@ package pl.sda.covidvavapp.api;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class HelloWorldController {
 
-    //adres waszej appki - localhost:8080/hello
     @GetMapping("/hello/{langCode}")
-    public String helloWorldInfo(@PathVariable String langCode) {
+    public String helloWorldInfo(@PathVariable String langCode, @RequestParam String name) {
+        String greetings;
         switch (langCode.toUpperCase()) {
             case "EN":
-                return "Hello world";
+                greetings = "Hello world";
+                break;
             case "ES":
-                return "Hola!";
+                greetings = "Hola!";
+                break;
             case "PL":
-                return "Witaj świecie!";
+                greetings = "Witaj świecie!";
+                break;
             default:
                 return "Uknown language code";
         }
+
+        return greetings + " " + name;
     }
 }
