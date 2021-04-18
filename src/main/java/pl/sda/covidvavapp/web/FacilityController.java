@@ -2,10 +2,7 @@ package pl.sda.covidvavapp.web;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import pl.sda.covidvavapp.api.model.Facility;
 import pl.sda.covidvavapp.api.model.NewPatient;
@@ -21,15 +18,25 @@ public class FacilityController {
 
     @GetMapping
     public ModelAndView displayAddFacilityPage() {
-        ModelAndView mav = new ModelAndView("addFacility");
-        mav.addObject("newFacility", new Facility());
+        ModelAndView mav = new ModelAndView("changeFacility");
+        mav.addObject("facility", new Facility());
+        return mav;
+    }
+
+    @GetMapping("/edit/{facilityId}")
+    public ModelAndView displayEditFacilityPage(@PathVariable Long facilityId) {
+        ModelAndView mav = new ModelAndView("changeFacility");
+        mav.addObject("facility", facilityService.getOne(facilityId));
         return mav;
     }
 
     @PostMapping
-    public String handleAddFacility(@ModelAttribute Facility newFacility) {
-        facilityService.create(newFacility);
-
+    public String handleFacilityChange(@ModelAttribute Facility facility) {
+        if (facility.getId() == null) {
+            facilityService.create(facility);
+        } else {
+            facilityService.update(facility);
+        }
         return "main";
     }
 }

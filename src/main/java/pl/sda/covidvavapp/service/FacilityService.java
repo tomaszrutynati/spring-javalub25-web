@@ -49,6 +49,12 @@ public class FacilityService {
                 .collect(Collectors.toList());
     }
 
+    public Facility getOne(Long id) {
+        return facilityRepository.getOne(id)
+                .map(this::mapToModel)
+                .orElseThrow(() -> new IllegalStateException("Facility doesn't exist"));
+    }
+
     private Facility mapToModel(FacilityEntity ent) {
         return Facility.builder()
                 .id(ent.getId())
