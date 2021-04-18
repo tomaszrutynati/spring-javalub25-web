@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.view.RedirectView;
 import pl.sda.covidvavapp.api.model.NewPatient;
 import pl.sda.covidvavapp.service.PatientService;
 
@@ -33,9 +34,12 @@ public class PatientController {
     }
 
     @PostMapping
-    public String handleAddPatient(@ModelAttribute NewPatient newPatient) {
+    public RedirectView handleAddPatient(@ModelAttribute NewPatient newPatient) {
         patientService.registerPatient(newPatient);
 
-        return "main";
+        RedirectView redirectView = new RedirectView();
+        redirectView.setUrl("/patient");
+
+        return redirectView;
     }
 }
