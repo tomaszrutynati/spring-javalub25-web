@@ -2,6 +2,7 @@ package pl.sda.covidvavapp.api.model;
 
 import lombok.*;
 import org.hibernate.validator.constraints.Length;
+import pl.sda.covidvavapp.api.validator.ZipCode;
 
 import javax.validation.constraints.AssertTrue;
 import javax.validation.constraints.Max;
@@ -22,7 +23,7 @@ public class Facility {
     @NotEmpty
     @Length(max = 10)
     private String houseNumber;
-    @Length(max = 6, min = 5)
+    @ZipCode
     private String zipCode;
     @NotEmpty
     private String city;
