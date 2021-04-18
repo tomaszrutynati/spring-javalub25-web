@@ -8,5 +8,14 @@
     Hello world!
 
     <p>Dziś mamy:<span th:text="${currentDate}"/></p>
+
+    <br>
+
+    <ul>
+        <li><a th:href="@{/patient}">Pacjenci</a></li>
+        <li><a th:href="@{/patient/add}">Dodaj pacjenta</a></li>
+        <li><a th:href="@{/facility}">Dodaj placówkę</a></li>
+        <li><a th:href="@{/vaccination}">Zaplanuj szczepienie</a></li>
+    </ul>
 </body>
 </html>
