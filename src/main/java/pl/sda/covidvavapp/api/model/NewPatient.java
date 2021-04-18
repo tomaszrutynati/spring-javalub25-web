@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.validator.constraints.pl.PESEL;
+import org.springframework.format.annotation.DateTimeFormat;
 import pl.sda.covidvavapp.api.validator.BirthDateAndPesel;
 
 import javax.validation.constraints.AssertTrue;
@@ -21,6 +22,7 @@ public class NewPatient {
     private String firstName;
     @NotNull(message = "Last name should not be null")
     private String lastName;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate birthDate;
     @PESEL(message = "PESEL should have proper value")
     private String pesel;
