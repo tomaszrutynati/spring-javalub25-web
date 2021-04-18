@@ -19,6 +19,13 @@ public class PatientController {
     private PatientService patientService;
 
     @GetMapping
+    public ModelAndView displayPatientsPage() {
+        ModelAndView mav = new ModelAndView("patients");
+        mav.addObject("patients", patientService.getAllPatients());
+        return mav;
+    }
+
+    @GetMapping("/add")
     public ModelAndView displayAddPatientPage() {
         ModelAndView mav = new ModelAndView("addPatient");
         mav.addObject("newPatient", new NewPatient());

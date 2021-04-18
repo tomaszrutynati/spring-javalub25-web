@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Vaccintation</title>
+    <style>
+        td {
+            border: 1px solid black;
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+</head>
+<body>
+    <table>
+        <thead>
+            <tr>
+                <td>Imię</td>
+                <td>Nazwisko</td>
+                <td>PESEL</td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="patient : ${patients}">
+                <td><span th:text="${patient.firstName}"></span></td>
+                <td><span th:text="${patient.lastName}"></span></td>
+                <td><span th:text="${patient.pesel}"></span></td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>
