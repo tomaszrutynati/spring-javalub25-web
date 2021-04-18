@@ -1,5 +1,6 @@
 package pl.sda.covidvavapp.api.validator;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import pl.sda.covidvavapp.api.model.NewVaccination;
 import pl.sda.covidvavapp.config.VaccinationTypeConfig;
 import pl.sda.covidvavapp.config.VaccinationTypeConfig.DateRange;
@@ -7,19 +8,14 @@ import pl.sda.covidvavapp.config.VaccinationTypeConfig.DateRange;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 import java.time.LocalDate;
-import java.util.HashMap;
 
 public class VaccineTimeRangeValidator implements ConstraintValidator<VaccineTimeRange, NewVaccination> {
 
+    @Autowired
     private VaccinationTypeConfig config;
 
     @Override
     public void initialize(VaccineTimeRange constraintAnnotation) {
-        HashMap<String, DateRange> types = new HashMap<>();
-        types.put("pfizer", new DateRange(LocalDate.parse("2021-01-01"), LocalDate.parse("2021-07-01")));
-        types.put("moderna", new DateRange(LocalDate.parse("2021-02-01"), LocalDate.parse("2021-12-31")));
-        types.put("astrazeneca", new DateRange(LocalDate.parse("2021-03-01"), LocalDate.parse("2021-04-20")));
-        config = new VaccinationTypeConfig(types);
     }
 
     @Override

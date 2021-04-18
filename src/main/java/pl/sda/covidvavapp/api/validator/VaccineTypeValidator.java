@@ -1,22 +1,18 @@
 package pl.sda.covidvavapp.api.validator;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import pl.sda.covidvavapp.config.VaccinationTypeConfig;
+
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
-import java.util.Arrays;
-import java.util.List;
 
 public class VaccineTypeValidator implements ConstraintValidator<VaccineType, String> {
 
-    private static final List<String> VAC_TYPES =
-            Arrays.asList("Moderna", "Pfizer", "AstraZeneca");
-
-    @Override
-    public void initialize(VaccineType constraintAnnotation) {
-
-    }
+    @Autowired
+    private VaccinationTypeConfig config;
 
     @Override
     public boolean isValid(String value, ConstraintValidatorContext constraintValidatorContext) {
-        return VAC_TYPES.contains(value);
+        return config.getTypes().keySet().contains(value.toLowerCase());
     }
 }
