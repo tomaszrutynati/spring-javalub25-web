@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>Vaccintation</title>
+</head>
+<body>
+Dodaj szczepienie <br>
+
+<form th:action="@{/vaccination}" th:object="${newVaccination}" method="post">
+    Pacjent :
+    <select th:field="*{patientId}"/>
+        <option th:each="opt : ${patients}"
+            th:text="${opt.text}" th:value="${opt.id}"/>
+    </select>
+    <br>
+    Typ :
+    <select th:field="*{vacType}"/>
+        <option th:each="opt : ${types}"
+            th:text="${opt.text}" th:value="${opt.id}"/>
+    </select>
+
+    <br>
+    Data : <input type="date" th:field="*{date}"/><br>
+    Placówka :
+    <select th:field="*{address}"/>
+        <option th:each="opt : ${facilities}"
+            th:text="${opt.text}" th:value="${opt.id}"/>
+    </select><br>
+
+    <input type="submit" value="Zapisz"/>
+</form>
+</body>
+</html>

@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.format.annotation.DateTimeFormat;
 import pl.sda.covidvavapp.api.validator.VaccineTimeRange;
 import pl.sda.covidvavapp.api.validator.VaccineType;
 
@@ -19,5 +20,6 @@ public class NewVaccination {
     private String address;
     @VaccineType
     private String vacType;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate date;
 }
