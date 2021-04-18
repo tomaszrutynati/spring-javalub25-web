@@ -8,7 +8,7 @@ import pl.sda.covidvavapp.service.VaccinationService;
 import javax.validation.Valid;
 
 @RestController
-@RequestMapping("/vaccination")
+@RequestMapping("/api/vaccination")
 @AllArgsConstructor
 public class VaccinationEndpoint {
 

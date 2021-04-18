@@ -17,7 +17,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/patient")
+@RequestMapping("/api/patient")
 @AllArgsConstructor
 public class PatientEndpoint {
 
