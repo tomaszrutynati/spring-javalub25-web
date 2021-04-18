@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>Vaccintation</title>
+</head>
+<body>
+    Dodaj placówkę <br>
+
+    <form th:action="@{/facility}" th:object="${newFacility}" method="post">
+        Nazwa : <input th:field="*{name}"/><br>
+        Ulica : <input th:field="*{street}"/><br>
+        Nr budynku : <input th:field="*{houseNumber}"/><br>
+        Kod pocztowy : <input th:field="*{zipCode}"/><br>
+        Miasto : <input th:field="*{city}"/><br>
+        Telefon : <input th:field="*{phoneNumber}"/><br>
+
+        <input type="submit" value="Zapisz"/>
+    </form>
+</body>
+</html>
