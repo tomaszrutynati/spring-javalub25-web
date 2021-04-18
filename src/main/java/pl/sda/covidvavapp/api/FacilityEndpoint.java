@@ -7,6 +7,7 @@ import pl.sda.covidvavapp.api.model.Facility;
 import pl.sda.covidvavapp.api.model.FacilitySearchParams;
 import pl.sda.covidvavapp.service.FacilityService;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -18,12 +19,12 @@ public class FacilityEndpoint {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public void create(@RequestBody Facility facility) {
+    public void create(@Valid @RequestBody Facility facility) {
         facilityService.create(facility);
     }
 
     @PutMapping
-    public void update(@RequestBody Facility facility) {
+    public void update(@Valid @RequestBody Facility facility) {
         facilityService.update(facility);
     }
 
