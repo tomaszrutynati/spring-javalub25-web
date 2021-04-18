@@ -3,6 +3,7 @@ package pl.sda.covidvavapp.service;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import pl.sda.covidvavapp.api.model.Facility;
+import pl.sda.covidvavapp.api.model.FacilitySearchParams;
 import pl.sda.covidvavapp.repository.FacilityEntity;
 import pl.sda.covidvavapp.repository.FacilityRepository;
 
@@ -14,6 +15,13 @@ import java.util.stream.Collectors;
 public class FacilityService {
 
     private FacilityRepository facilityRepository;
+
+    public List<Facility> findByParams(FacilitySearchParams searchParams) {
+        return facilityRepository.findByParams(searchParams)
+                .stream()
+                .map(this::mapToModel)
+                .collect(Collectors.toList());
+    }
 
     public void create(Facility facility) {
         FacilityEntity entity = mapToEntity(facility);
@@ -37,16 +45,20 @@ public class FacilityService {
     public List<Facility> getAll() {
         return facilityRepository.getAll()
                 .stream()
-                .map(ent -> Facility.builder()
-                        .id(ent.getId())
-                        .city(ent.getCity())
-                        .zipCode(ent.getZipCode())
-                        .phoneNumber(ent.getPhoneNumber())
-                        .houseNumber(ent.getHouseNumber())
-                        .street(ent.getStreet())
-                        .name(ent.getName())
-                        .build())
+                .map(this::mapToModel)
                 .collect(Collectors.toList());
+    }
+
+    private Facility mapToModel(FacilityEntity ent) {
+        return Facility.builder()
+                .id(ent.getId())
+                .city(ent.getCity())
+                .zipCode(ent.getZipCode())
+                .phoneNumber(ent.getPhoneNumber())
+                .houseNumber(ent.getHouseNumber())
+                .street(ent.getStreet())
+                .name(ent.getName())
+                .build();
     }
 
     private FacilityEntity mapToEntity(Facility facility) {
