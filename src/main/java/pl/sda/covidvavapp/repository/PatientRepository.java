@@ -11,4 +11,10 @@ public interface PatientRepository extends JpaRepository<PatientEntity, Long> {
     List<PatientEntity> findAllByBirthDateBetween(LocalDate youngerThan, LocalDate olderThan);
 
     Optional<PatientEntity> findByPesel(String pesel);
+
+    //1
+    Long countAllByLastNameIgnoreCase(String lastName);
+
+    //5
+    List<PatientEntity> findAllByFirstNameIn(List<String> names);
 }
