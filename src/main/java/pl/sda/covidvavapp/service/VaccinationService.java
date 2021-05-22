@@ -17,7 +17,7 @@ public class VaccinationService {
     private PatientRepository patientRepository;
 
     public void planVaccination(NewVaccination vaccination) {
-        patientRepository.getById(vaccination.getPatientId()).ifPresent(patient -> {
+        patientRepository.findById(vaccination.getPatientId()).ifPresent(patient -> {
                     if (!patient.getVaccinations().isEmpty()) {
                         throw new PatientAlreadyVaccinatedException("Patient has planned vaccinations");
                     }
@@ -28,7 +28,7 @@ public class VaccinationService {
     }
 
     public void removePlannedVaccination(Long patientId) {
-        Optional<PatientEntity> maybePatient = patientRepository.getById(patientId);
+        Optional<PatientEntity> maybePatient = patientRepository.findById(patientId);
 
         if (!maybePatient.isPresent()) {
             return;

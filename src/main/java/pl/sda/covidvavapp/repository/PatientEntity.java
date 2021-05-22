@@ -2,20 +2,25 @@ package pl.sda.covidvavapp.repository;
 
 import lombok.*;
 
+import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
 
+@Entity
+@Table(name = "patients")
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Builder
 public class PatientEntity {
-    @Setter
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String firstName;
     private String lastName;
     private String pesel;
+    @OneToMany(mappedBy = "patient")
     private Set<VaccinationEntity> vaccinations = new HashSet<>();
 
     public PatientEntity updatePatient(String newFirstName, String newLastName) {

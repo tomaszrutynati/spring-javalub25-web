@@ -7,6 +7,7 @@ import pl.sda.covidvavapp.api.model.FacilitySearchParams;
 import pl.sda.covidvavapp.repository.FacilityEntity;
 import pl.sda.covidvavapp.repository.FacilityRepository;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -17,40 +18,37 @@ public class FacilityService {
     private FacilityRepository facilityRepository;
 
     public List<Facility> findByParams(FacilitySearchParams searchParams) {
-        return facilityRepository.findByParams(searchParams)
+        return new ArrayList<>();
+       /* return facilityRepository.findByParams(searchParams)
                 .stream()
                 .map(this::mapToModel)
-                .collect(Collectors.toList());
+                .collect(Collectors.toList());*/
     }
 
     public void create(Facility facility) {
         FacilityEntity entity = mapToEntity(facility);
 
-        facilityRepository.create(entity);
+        facilityRepository.save(entity);
     }
 
     public void update(Facility facility) {
-        facilityRepository.getOne(facility.getId()).ifPresent(fac -> {
-            FacilityEntity entity = mapToEntity(facility);
-            entity.setId(facility.getId());
-
-            facilityRepository.update(entity);
-        });
+        facilityRepository.findById(facility.getId())
+                .ifPresent(fac -> fac.updateFacility(facility));
     }
 
     public void remove(Long id) {
-        facilityRepository.remove(id);
+        facilityRepository.deleteById(id);
     }
 
     public List<Facility> getAll() {
-        return facilityRepository.getAll()
+        return facilityRepository.findAll()
                 .stream()
                 .map(this::mapToModel)
                 .collect(Collectors.toList());
     }
 
     public Facility getOne(Long id) {
-        return facilityRepository.getOne(id)
+        return facilityRepository.findById(id)
                 .map(this::mapToModel)
                 .orElseThrow(() -> new IllegalStateException("Facility doesn't exist"));
     }

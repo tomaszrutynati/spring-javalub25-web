@@ -27,30 +27,30 @@ public class PatientService {
                 .pesel(newPatient.getPesel())
                 .vaccinations(new HashSet<>())
                 .build();
-        patientRepository.create(entity);
+        patientRepository.save(entity);
     }
 
     public void updatePatient(UpdatePatient updatePatient) {
-        patientRepository.getById(updatePatient.getId())
+        patientRepository.findById(updatePatient.getId())
                 .map(pat -> pat.updatePatient(updatePatient.getFirstName(), updatePatient.getLastName()))
                 .orElseThrow(() -> new IllegalStateException("Patient doesn't exist"));
     }
 
     public Patient getPatient(Long id) {
-        return patientRepository.getById(id)
+        return patientRepository.findById(id)
                 .map(this::mapToPatient)
                 .orElseThrow(() -> new IllegalStateException("Patient doesn't exist"));
     }
 
     public List<Patient> getAllPatients() {
-        return patientRepository.getAll()
+        return patientRepository.findAll()
                 .stream()
                 .map(this::mapToPatient)
                 .collect(Collectors.toList());
     }
 
     public void deletePatient(Long id) {
-        patientRepository.delete(id);
+        patientRepository.deleteById(id);
     }
 
     private Patient mapToPatient(PatientEntity entity) {
