@@ -24,6 +24,8 @@
     </style>
 </head>
 <body>
+<div th:replace="fragments/utils.html :: navigation"></div>
+
 <div th:if="${patients != null and !patients.isEmpty()}">
     <table>
         <thead>
@@ -36,23 +38,8 @@
         </tr>
         </thead>
         <tbody>
-        <tr th:each="patient, iterator : ${patients}" th:class="${iterator.odd ? 'odd' : 'even'}">
-            <td><span th:text="${iterator.count}"></span></td>
-            <td><span th:text="${patient.firstName}"></span></td>
-            <td><span th:text="${patient.lastName}"></span></td>
-            <td><span th:text="${patient.pesel}"></span></td>
-            <td>
-                <div th:if="${patient.plannedVacs != null and !patient.plannedVacs.isEmpty()}">
-                    Zaplanowano szczepienie
-                </div>
-                <div th:if="${patient.getDoneVacs() != null and !patient.getDoneVacs().isEmpty()}">
-                    Wykonano szczepienie
-                </div>
-                <div th:if="${(patient.getPlannedVacs() == null or patient.getPlannedVacs().isEmpty()) and (
-                        patient.getDoneVacs() == null or patient.getDoneVacs().isEmpty())}">
-                    <a th:href="@{/vaccination}">Zaplanuj szczepienie</a>
-                </div>
-            </td>
+        <tr th:each="patient, iterator : ${patients}" th:class="${iterator.odd ? 'odd' : 'even'}"
+            th:include="fragments/patientsTable.html :: patientRow(patient, iterator)">
         </tr>
         </tbody>
     </table>
@@ -63,6 +50,7 @@
     <h2>Brak zarejestrowanych pacjentów</h2>
     <p><a th:href="@{/patient/add}">Dodaj pacjenta</a></p>
 </div>
+<div th:replace="fragments/utils.html :: footer"></div>
 
 </body>
 </html>

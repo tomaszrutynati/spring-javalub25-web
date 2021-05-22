@@ -5,6 +5,8 @@
     <title>Vaccintation</title>
 </head>
 <body>
+<div th:replace="fragments/utils.html :: navigation"></div>
+
 Dodaj szczepienie <br>
 
 <form th:action="@{/vaccination}" th:object="${newVaccination}" method="post">
@@ -30,5 +32,7 @@ Dodaj szczepienie <br>
 
     <input type="submit" value="Zapisz"/>
 </form>
+<div th:replace="fragments/utils.html :: footer"></div>
+
 </body>
 </html>

@@ -5,6 +5,8 @@
     <title>Vaccintation</title>
 </head>
 <body>
+    <div th:replace="fragments/utils.html :: navigation"></div>
+
     Dodaj pacjenta <br>
 
     <form th:action="@{/patient}" th:object="${newPatient}" method="post">
@@ -15,5 +17,7 @@
 
         <input type="submit" value="Zapisz"/>
     </form>
+
+    <div th:replace="fragments/utils.html :: footer"></div>
 </body>
 </html>
