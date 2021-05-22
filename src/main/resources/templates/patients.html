@@ -41,7 +41,18 @@
             <td><span th:text="${patient.firstName}"></span></td>
             <td><span th:text="${patient.lastName}"></span></td>
             <td><span th:text="${patient.pesel}"></span></td>
-            <td></td>
+            <td>
+                <div th:if="${patient.plannedVacs != null and !patient.plannedVacs.isEmpty()}">
+                    Zaplanowano szczepienie
+                </div>
+                <div th:if="${patient.getDoneVacs() != null and !patient.getDoneVacs().isEmpty()}">
+                    Wykonano szczepienie
+                </div>
+                <div th:if="${(patient.getPlannedVacs() == null or patient.getPlannedVacs().isEmpty()) and (
+                        patient.getDoneVacs() == null or patient.getDoneVacs().isEmpty())}">
+                    <a th:href="@{/vaccination}">Zaplanuj szczepienie</a>
+                </div>
+            </td>
         </tr>
         </tbody>
     </table>
