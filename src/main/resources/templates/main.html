@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Vaccintation</title>
+    <link th:href="@{/style/main.css}" rel="stylesheet"/>
 </head>
 <body>
     Hello world!
@@ -14,6 +15,8 @@
     <div th:replace="fragments/utils.html :: navigation"></div>
 
     <div th:replace="fragments/utils.html :: footer"></div>
+
+    <img th:src="@{/cat.jpg}"/>
 
 </body>
 </html>

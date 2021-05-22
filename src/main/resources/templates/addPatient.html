@@ -3,21 +3,59 @@
 <head>
     <meta charset="UTF-8">
     <title>Vaccintation</title>
+    <link th:href="@{/style/main.css}" rel="stylesheet"/>
+    <link rel="stylesheet" href="/webjars/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="/webjars/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </head>
 <body>
-    <div th:replace="fragments/utils.html :: navigation"></div>
+<div th:replace="fragments/utils.html :: navigation"></div>
 
-    Dodaj pacjenta <br>
-
+Dodaj pacjenta <br>
+<div class="container">
     <form th:action="@{/patient}" th:object="${newPatient}" method="post">
-        Imię : <input th:field="*{firstName}"/><br>
-        Nazwisko : <input th:field="*{lastName}"/><br>
-        Data urodzenia : <input type="date" th:field="*{birthDate}"/><br>
-        PESEL : <input th:field="*{pesel}"/><br>
+        <div class="row">
+            <div class="col-2">
+                Imię :
+            </div>
+            <div class="col-4">
+                <input th:field="*{firstName}"/>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-2">
+                Nazwisko :
+            </div>
+            <div class="col-4">
+                <input th:field="*{lastName}"/>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-2">
+                Data urodzenia :
+            </div>
+            <div class="col-4">
+                <input type="date" th:field="*{birthDate}"/>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-2">
+                PESEL :
+            </div>
+            <div class="col-4">
+                <input th:field="*{pesel}"/>
+            </div>
+        </div>
 
-        <input type="submit" value="Zapisz"/>
+        <br>
+        <div class="container">
+            <div class="row">
+                <div class="offset-4">
+                    <input type="submit" value="Zapisz" class="btn btn-success">
+                </div>
+            </div>
+        </div>
     </form>
-
-    <div th:replace="fragments/utils.html :: footer"></div>
+</div>
+<div th:replace="fragments/utils.html :: footer"></div>
 </body>
 </html>
