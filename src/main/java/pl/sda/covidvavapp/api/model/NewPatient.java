@@ -9,6 +9,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import pl.sda.covidvavapp.api.validator.BirthDateAndPesel;
 
 import javax.validation.constraints.AssertTrue;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 
@@ -18,9 +19,9 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @BirthDateAndPesel
 public class NewPatient {
-    @NotNull(message = "First name should not be null")
+    @NotBlank(message = "First name should be present")
     private String firstName;
-    @NotNull(message = "Last name should not be null")
+    @NotBlank(message = "Last name should be present")
     private String lastName;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate birthDate;
@@ -29,6 +30,9 @@ public class NewPatient {
 
     @AssertTrue(message = "Birth date should be in past")
     public boolean isBirthDateInPast() {
+        if (birthDate == null) {
+            return false;
+        }
         return birthDate.isBefore(LocalDate.now());
     }
 }

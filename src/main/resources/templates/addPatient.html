@@ -54,6 +54,13 @@ Dodaj pacjenta <br>
                 </div>
             </div>
         </div>
+
+        <span class="text-danger" th:if="${#fields.hasErrors('firstName')}" th:text="${#fields.errors('firstName')}"></span><br>
+        <span class="text-danger" th:if="${#fields.hasErrors('lastName')}" th:text="${#fields.errors('lastName')}"></span><br>
+        <span class="text-danger" th:if="${#fields.hasErrors('birthDate')}" th:text="${#fields.errors('birthDate')}"></span><br>
+        <span class="text-danger" th:if="${#fields.hasErrors('pesel')}" th:text="${#fields.errors('pesel')}"></span><br>
+
+        <span class="text-danger" th:if="${#fields.hasGlobalErrors()}" th:text="${#fields.globalErrors()}"></span><br>
     </form>
 </div>
 <div th:replace="fragments/utils.html :: footer"></div>

@@ -11,6 +11,10 @@ public class BirthDateAndPeselValidator implements ConstraintValidator<BirthDate
     public boolean isValid(NewPatient newPatient, ConstraintValidatorContext constraintValidatorContext) {
         String pesel = newPatient.getPesel();
 
+        if (pesel == null || pesel.length() != 11) {
+            return false;
+        }
+
         int yearFromPesel = Integer.parseInt("19" + pesel.substring(0, 2));
         int monthFromPesel = Integer.parseInt(pesel.substring(2, 4));
         int dayFromPesel = Integer.parseInt(pesel.substring(4, 6));
