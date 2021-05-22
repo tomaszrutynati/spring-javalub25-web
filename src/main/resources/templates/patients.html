@@ -7,37 +7,51 @@
         table {
             border-spacing: 0px;
         }
+
         td {
             border: 1px solid black;
             margin: 0;
             padding: 0;
         }
+
         .odd {
             background-color: green;
         }
+
         .even {
             background-color: greenyellow;
         }
     </style>
 </head>
 <body>
+<div th:if="${patients != null and !patients.isEmpty()}">
     <table>
         <thead>
-            <tr>
-                <td>Lp.</td>
-                <td>Imię</td>
-                <td>Nazwisko</td>
-                <td>PESEL</td>
-            </tr>
+        <tr>
+            <td>Lp.</td>
+            <td>Imię</td>
+            <td>Nazwisko</td>
+            <td>PESEL</td>
+            <td>Zaplanowane szczepienie</td>
+        </tr>
         </thead>
         <tbody>
-            <tr th:each="patient, iterator : ${patients}" th:class="${iterator.odd ? 'odd' : 'even'}">
-                <td><span th:text="${iterator.count}"></span></td>
-                <td><span th:text="${patient.firstName}"></span></td>
-                <td><span th:text="${patient.lastName}"></span></td>
-                <td><span th:text="${patient.pesel}"></span></td>
-            </tr>
+        <tr th:each="patient, iterator : ${patients}" th:class="${iterator.odd ? 'odd' : 'even'}">
+            <td><span th:text="${iterator.count}"></span></td>
+            <td><span th:text="${patient.firstName}"></span></td>
+            <td><span th:text="${patient.lastName}"></span></td>
+            <td><span th:text="${patient.pesel}"></span></td>
+            <td></td>
+        </tr>
         </tbody>
     </table>
+</div>
+
+<!--<div th:if="${patients == null or patients.isEmpty()}">-->
+<div th:unless="${patients != null and !patients.isEmpty()}">
+    <h2>Brak zarejestrowanych pacjentów</h2>
+    <p><a th:href="@{/patient/add}">Dodaj pacjenta</a></p>
+</div>
+
 </body>
 </html>
