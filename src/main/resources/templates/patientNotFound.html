@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Vaccintation</title>
+    <link th:href="@{/style/main.css}" rel="stylesheet"/>
+
+    <link rel="stylesheet" href="/webjars/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="/webjars/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+
+    <div th:replace="fragments/utils.html :: navigation"></div>
+
+    <h4 class="text-danger">Pacjent z PESEL <span th:text="${pesel}"></span> nie istnieje w bazie danych</h4>
+
+    <div th:replace="fragments/utils.html :: footer"></div>
+
+
+</body>
+</html>

@@ -63,6 +63,11 @@ public class PatientService {
                 .collect(Collectors.toList());
     }
 
+    public Optional<Patient> findByPesel(String pesel) {
+        return patientRepository.findByPesel(pesel)
+                .map(this::mapToPatient);
+    }
+
     public void deletePatient(Long id) {
         patientRepository.deleteById(id);
     }

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Vaccintation</title>
+    <link th:href="@{/style/main.css}" rel="stylesheet"/>
+
+    <link rel="stylesheet" href="/webjars/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="/webjars/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+
+    <div th:replace="fragments/utils.html :: navigation"></div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-2">
+                Imię
+            </div>
+            <div class="col-4">
+                <span th:text="${patient.firstName}"></span>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-2">
+                Nazwisko
+            </div>
+            <div class="col-4">
+                <span th:text="${patient.lastName}"></span>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-2">
+                Pesel
+            </div>
+            <div class="col-4">
+                <span th:text="${patient.pesel}"></span>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-6">
+                Zaplanowane szczepienia:
+                <p th:each="vac : ${patient.getPlannedVacs()}">
+                    <span th:text="${vac.getDate() + ' ' + vac.getVacType()}"></span>
+                </p>
+            </div>
+            <div class="col-6">
+                Odbyte szczepienia:
+                <p th:each="vac : ${patient.getDoneVacs()}">
+                    <span th:text="${vac.getDate() + ' ' + vac.getVacType()}"></span>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div th:replace="fragments/utils.html :: footer"></div>
+</body>
+</html>

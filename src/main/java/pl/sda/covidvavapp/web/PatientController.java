@@ -7,10 +7,12 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import pl.sda.covidvavapp.api.model.NewPatient;
+import pl.sda.covidvavapp.api.model.Patient;
 import pl.sda.covidvavapp.service.PatientService;
 
 import javax.validation.Valid;
 import java.time.LocalDate;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("/patient")
@@ -24,6 +26,21 @@ public class PatientController {
         ModelAndView mav = new ModelAndView("patients");
         mav.addObject("patients", patientService.getAllPatients());
         return mav;
+    }
+
+    @GetMapping("/pesel/{pesel}")
+    public ModelAndView displayPatientDetailsPage(@PathVariable String pesel) {
+        Optional<Patient> maybePatient = patientService.findByPesel(pesel);
+
+        if (maybePatient.isPresent()) {
+            ModelAndView mav = new ModelAndView("patientDetails");
+            mav.addObject("patient", maybePatient.get());
+            return mav;
+        } else {
+            ModelAndView mav = new ModelAndView("patientNotFound");
+            mav.addObject("pesel", pesel);
+            return mav;
+        }
     }
 
     @GetMapping("/byAge")
