@@ -17,27 +17,51 @@ Zmień placówkę <br>
                 <input type="hidden" th:field="*{id}" th:value="${facility.id}"/>
                 <div class="form-group">
                     <label for="facilityName">Nazwa</label>
-                    <input th:field="*{name}" th:value="${facility.name}" id="facilityName" placeholder="Podaj nazwę" class="form-control"/>
+                    <input th:field="*{name}" th:value="${facility.name}"
+                           id="facilityName" placeholder="Podaj nazwę" class="form-control" aria-describedby="nameError"/>
+                    <small th:if="${#fields.hasErrors('name')}" id="nameError" class="form-text text-danger">
+                        <span th:text="${#fields.errors('name')}"></span>
+                    </small>
                 </div>
                 <div class="form-group">
                     <label for="facilityStreet">Ulica</label>
-                    <input th:field="*{street}" th:value="${facility.street}" id="facilityStreet" placeholder="Podaj ulicę" class="form-control"/>
+                    <input th:field="*{street}" th:value="${facility.street}"
+                           id="facilityStreet" placeholder="Podaj ulicę" class="form-control" aria-describedby="nameError"/>
+                    <small th:if="${#fields.hasErrors('street')}" id="streetError" class="form-text text-danger">
+                        <span th:text="${#fields.errors('street')}"></span>
+                    </small>
                 </div>
                 <div class="form-group">
                     <label for="facilityNumber">Numer budynku</label>
-                    <input th:field="*{houseNumber}" th:value="${facility.houseNumber}" id="facilityNumber" placeholder="Podaj numer budynku" class="form-control"/>
+                    <input th:field="*{houseNumber}" th:value="${facility.houseNumber}"
+                           id="facilityNumber" placeholder="Podaj numer budynku" class="form-control" aria-describedby="houseError"/>
+                    <small th:if="${#fields.hasErrors('houseNumber')}" id="houseError" class="form-text text-danger">
+                        <span th:text="${#fields.errors('houseNumber')}"></span>
+                    </small>
                 </div>
                 <div class="form-group">
                     <label for="facilityZipCode">Kod pocztowy</label>
-                    <input th:field="*{zipCode}" th:value="${facility.zipCode}" id="facilityZipCode" placeholder="Podaj kod pocztowy" class="form-control"/>
+                    <input th:field="*{zipCode}" th:value="${facility.zipCode}"
+                           id="facilityZipCode" placeholder="Podaj kod pocztowy" class="form-control" aria-describedby="zipCodeError"/>
+                    <small th:if="${#fields.hasErrors('zipCode')}" id="zipCodeError" class="form-text text-danger">
+                        <span th:text="${#fields.errors('zipCode')}"></span>
+                    </small>
                 </div>
                 <div class="form-group">
                     <label for="facilityCity">Miasto</label>
-                    <input th:field="*{city}" th:value="${facility.city}" id="facilityCity" placeholder="Podaj miasto" class="form-control"/>
+                    <input th:field="*{city}" th:value="${facility.city}"
+                           id="facilityCity" placeholder="Podaj miasto" class="form-control" aria-describedby="cityError"/>
+                    <small th:if="${#fields.hasErrors('city')}" id="cityError" class="form-text text-danger">
+                        <span th:text="${#fields.errors('city')}"></span>
+                    </small>
                 </div>
                 <div class="form-group">
                     <label for="facilityPhone">Numer telefonu</label>
-                    <input th:field="*{phoneNumber}" th:value="${facility.phoneNumber}" id="facilityPhone" placeholder="Podaj numer tel" class="form-control"/>
+                    <input th:field="*{phoneNumber}" th:value="${facility.phoneNumber}"
+                           id="facilityPhone" placeholder="Podaj numer tel" class="form-control" aria-describedby="phoneError"/>
+                    <small th:if="${#fields.hasErrors('phoneNumber')}" id="phoneError" class="form-text text-danger">
+                        <span th:text="${#fields.errors('phoneNumber')}"></span>
+                    </small>
                 </div>
                 <input type="submit" value="Zapisz" class="btn btn-primary"/>
             </form>

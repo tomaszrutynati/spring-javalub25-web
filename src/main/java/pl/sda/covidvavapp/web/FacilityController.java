@@ -2,12 +2,15 @@ package pl.sda.covidvavapp.web;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import pl.sda.covidvavapp.api.model.Facility;
 import pl.sda.covidvavapp.api.model.NewPatient;
 import pl.sda.covidvavapp.service.FacilityService;
 import pl.sda.covidvavapp.service.PatientService;
+
+import javax.validation.Valid;
 
 @Controller
 @RequestMapping("/facility")
@@ -39,7 +42,11 @@ public class FacilityController {
     }
 
     @PostMapping
-    public String handleFacilityChange(@ModelAttribute Facility facility) {
+    public String handleFacilityChange(@Valid @ModelAttribute Facility facility, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return "changeFacility";
+        }
+
         if (facility.getId() == null) {
             facilityService.create(facility);
         } else {
