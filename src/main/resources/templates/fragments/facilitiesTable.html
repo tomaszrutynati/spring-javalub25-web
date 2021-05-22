@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Vaccintation</title>
+</head>
+<body>
+<div th:fragment="facilitiesTable(facilities)">
+    <table>
+        <thead>
+        <tr>
+            <td>Np</td>
+            <td>Nazwa</td>
+            <td>Adres</td>
+            <td>Numer tel</td>
+            <td>Edycja</td>
+        </tr>
+        </thead>
+        <tbody>
+            <tr th:each="facility, iterator : ${facilities}">
+                <td><span th:text="${iterator.count}"></span></td>
+                <td><span th:text="${facility.name}"></span></td>
+                <td><span th:text="${facility.street} + ' ' + ${facility.houseNumber}
+                    + ' '+ ${facility.zipCode} + ' ' + ${facility.city}"></span></td>
+                <td><span th:text="${facility.phoneNumber}"></span></td>
+                <td><a th:href="@{/facility/edit/__${facility.id}__}">Edytuj</a></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

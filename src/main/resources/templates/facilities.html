@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Vaccintation</title>
+</head>
+<body>
+    <div th:replace="fragments/utils.html :: navigation"></div>
+
+    <h4>Placówki</h4>
+
+    <div th:replace="fragments/facilitiesTable.html :: facilitiesTable(${facilities})"></div>
+    <div th:replace="fragments/utils.html :: footer"></div>
+</body>
+</html>

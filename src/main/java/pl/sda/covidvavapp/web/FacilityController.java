@@ -16,7 +16,15 @@ public class FacilityController {
 
     private FacilityService facilityService;
 
+
     @GetMapping
+    public ModelAndView displayFacilitiesPage() {
+        ModelAndView mav = new ModelAndView("facilities");
+        mav.addObject("facilities", facilityService.getAll());
+        return mav;
+    }
+
+    @GetMapping("/add")
     public ModelAndView displayAddFacilityPage() {
         ModelAndView mav = new ModelAndView("changeFacility");
         mav.addObject("facility", new Facility());
@@ -37,6 +45,6 @@ public class FacilityController {
         } else {
             facilityService.update(facility);
         }
-        return "main";
+        return "redirect:/facility";
     }
 }
