@@ -53,6 +53,13 @@ public class FacilityService {
                 .orElseThrow(() -> new IllegalStateException("Facility doesn't exist"));
     }
 
+    public List<Facility> findAllInZipCode(String zipCode) {
+        return facilityRepository.findAllByZipCodeOrderByName(zipCode)
+                .stream()
+                .map(this::mapToModel)
+                .collect(Collectors.toList());
+    }
+
     private Facility mapToModel(FacilityEntity ent) {
         return Facility.builder()
                 .id(ent.getId())

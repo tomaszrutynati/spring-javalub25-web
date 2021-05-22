@@ -27,6 +27,14 @@ public class FacilityController {
         return mav;
     }
 
+    @GetMapping("/zipCode")
+    public ModelAndView displayFacilitiesPageInZipCode(
+            @RequestParam String zipCode) {
+        ModelAndView mav = new ModelAndView("facilities");
+        mav.addObject("facilities", facilityService.findAllInZipCode(zipCode));
+        return mav;
+    }
+
     @GetMapping("/add")
     public ModelAndView displayAddFacilityPage() {
         ModelAndView mav = new ModelAndView("changeFacility");
