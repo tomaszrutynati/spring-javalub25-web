@@ -13,7 +13,10 @@ import pl.sda.covidvavapp.repository.VaccinationEntity;
 import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
+
+import static java.util.Optional.ofNullable;
 
 @Service
 @AllArgsConstructor
@@ -51,8 +54,10 @@ public class PatientService {
                 .collect(Collectors.toList());
     }
 
-    public List<Patient> getOlderThan(LocalDate date) {
-        return patientRepository.findAllByBirthDateBefore(date)
+    public List<Patient> findByBirthDate(LocalDate youngerThan, LocalDate olderThan) {
+        return ofNullable(youngerThan)
+                .map(date -> patientRepository.findAllByBirthDateBetween(date, olderThan))
+                .orElseGet(() -> patientRepository.findAllByBirthDateBefore(olderThan))
                 .stream()
                 .map(this::mapToPatient)
                 .collect(Collectors.toList());

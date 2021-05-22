@@ -7,5 +7,5 @@ import java.util.List;
 
 public interface PatientRepository extends JpaRepository<PatientEntity, Long> {
     List<PatientEntity> findAllByBirthDateBefore(LocalDate olderThan);
-
+    List<PatientEntity> findAllByBirthDateBetween(LocalDate youngerThan, LocalDate olderThan);
 }
