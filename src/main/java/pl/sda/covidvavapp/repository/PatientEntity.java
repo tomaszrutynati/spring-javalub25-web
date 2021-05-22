@@ -20,6 +20,7 @@ public class PatientEntity {
     private String firstName;
     private String lastName;
     private String pesel;
+    private LocalDate birthDate;
     @OneToMany(mappedBy = "patient")
     private Set<VaccinationEntity> vaccinations = new HashSet<>();
 

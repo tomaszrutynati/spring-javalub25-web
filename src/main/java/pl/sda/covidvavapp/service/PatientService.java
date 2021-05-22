@@ -10,6 +10,7 @@ import pl.sda.covidvavapp.repository.PatientEntity;
 import pl.sda.covidvavapp.repository.PatientRepository;
 import pl.sda.covidvavapp.repository.VaccinationEntity;
 
+import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -24,6 +25,7 @@ public class PatientService {
         PatientEntity entity = PatientEntity.builder()
                 .firstName(newPatient.getFirstName())
                 .lastName(newPatient.getLastName())
+                .birthDate(newPatient.getBirthDate())
                 .pesel(newPatient.getPesel())
                 .vaccinations(new HashSet<>())
                 .build();
@@ -44,6 +46,13 @@ public class PatientService {
 
     public List<Patient> getAllPatients() {
         return patientRepository.findAll()
+                .stream()
+                .map(this::mapToPatient)
+                .collect(Collectors.toList());
+    }
+
+    public List<Patient> getOlderThan(LocalDate date) {
+        return patientRepository.findAllByBirthDateBefore(date)
                 .stream()
                 .map(this::mapToPatient)
                 .collect(Collectors.toList());

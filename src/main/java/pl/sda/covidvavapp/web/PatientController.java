@@ -1,19 +1,18 @@
 package pl.sda.covidvavapp.web;
 
 import lombok.AllArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 import pl.sda.covidvavapp.api.model.NewPatient;
 import pl.sda.covidvavapp.service.PatientService;
 
 import javax.validation.Valid;
+import java.time.LocalDate;
 
 @Controller
 @RequestMapping("/patient")
@@ -26,6 +25,13 @@ public class PatientController {
     public ModelAndView displayPatientsPage() {
         ModelAndView mav = new ModelAndView("patients");
         mav.addObject("patients", patientService.getAllPatients());
+        return mav;
+    }
+
+    @GetMapping("/byAge")
+    public ModelAndView displayPatientsPageByAge(@RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate olderThan) {
+        ModelAndView mav = new ModelAndView("patients");
+        mav.addObject("patients", patientService.getOlderThan(olderThan));
         return mav;
     }
 
