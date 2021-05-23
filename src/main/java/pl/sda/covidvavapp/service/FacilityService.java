@@ -7,7 +7,6 @@ import pl.sda.covidvavapp.api.model.FacilitySearchParams;
 import pl.sda.covidvavapp.repository.FacilityEntity;
 import pl.sda.covidvavapp.repository.FacilityRepository;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -18,11 +17,10 @@ public class FacilityService {
     private FacilityRepository facilityRepository;
 
     public List<Facility> findByParams(FacilitySearchParams searchParams) {
-        return new ArrayList<>();
-       /* return facilityRepository.findByParams(searchParams)
+        return facilityRepository.findWithSearchParams(searchParams)
                 .stream()
                 .map(this::mapToModel)
-                .collect(Collectors.toList());*/
+                .collect(Collectors.toList());
     }
 
     public void create(Facility facility) {

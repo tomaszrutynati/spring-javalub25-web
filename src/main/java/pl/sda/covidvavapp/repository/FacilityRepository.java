@@ -4,7 +4,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
 
-public interface FacilityRepository extends JpaRepository<FacilityEntity, Long> {
+public interface FacilityRepository extends
+        JpaRepository<FacilityEntity, Long>, CustomFacilityRepository {
 
     List<FacilityEntity> findAllByZipCodeOrderByName(String zipCode);
 

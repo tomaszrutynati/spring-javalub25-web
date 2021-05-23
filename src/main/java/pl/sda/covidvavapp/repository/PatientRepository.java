@@ -33,6 +33,4 @@ public interface PatientRepository extends JpaRepository<PatientEntity, Long> {
             "inner join pat.vaccinations vac " +
             "where vac.date = (select min(vc.date) from VaccinationEntity vc)")
     List<String> findPatientsPeselsVaccinatedInFirstDay();
-
-
 }

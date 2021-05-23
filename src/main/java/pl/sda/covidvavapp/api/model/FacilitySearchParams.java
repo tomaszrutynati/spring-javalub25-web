@@ -13,5 +13,4 @@ public class FacilitySearchParams {
     private String street;
     private String zipCode;
     private String city;
-
 }
