@@ -2,6 +2,7 @@ package pl.sda.covidvavapp.service;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import pl.sda.covidvavapp.api.model.Facility;
 import pl.sda.covidvavapp.api.model.FacilitySearchParams;
 import pl.sda.covidvavapp.repository.FacilityEntity;
@@ -29,6 +30,7 @@ public class FacilityService {
         facilityRepository.save(entity);
     }
 
+    @Transactional
     public void update(Facility facility) {
         facilityRepository.findById(facility.getId())
                 .ifPresent(fac -> fac.updateFacility(facility));

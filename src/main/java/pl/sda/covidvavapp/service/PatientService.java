@@ -2,6 +2,7 @@ package pl.sda.covidvavapp.service;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import pl.sda.covidvavapp.api.model.NewPatient;
 import pl.sda.covidvavapp.api.model.Patient;
 import pl.sda.covidvavapp.api.model.UpdatePatient;
@@ -35,6 +36,7 @@ public class PatientService {
         patientRepository.save(entity);
     }
 
+    @Transactional
     public void updatePatient(UpdatePatient updatePatient) {
         patientRepository.findById(updatePatient.getId())
                 .map(pat -> pat.updatePatient(updatePatient.getFirstName(), updatePatient.getLastName()))
