@@ -2,6 +2,7 @@ package pl.sda.covidvavapp.web;
 
 import lombok.AllArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
@@ -22,6 +23,7 @@ public class PatientController {
     private PatientService patientService;
 
     @GetMapping
+    @PreAuthorize("permitAll()")
     public ModelAndView displayPatientsPage() {
         ModelAndView mav = new ModelAndView("patients");
         mav.addObject("patients", patientService.getAllPatients());
@@ -29,6 +31,7 @@ public class PatientController {
     }
 
     @GetMapping("/pesel/{pesel}")
+    @PreAuthorize("isAuthenticated()")
     public ModelAndView displayPatientDetailsPage(@PathVariable String pesel) {
         Optional<Patient> maybePatient = patientService.findByPesel(pesel);
 
@@ -44,6 +47,7 @@ public class PatientController {
     }
 
     @GetMapping("/byAge")
+    @PreAuthorize("isAuthenticated()")
     public ModelAndView displayPatientsPageByAge(
             @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate olderThan,
             @RequestParam(required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate youngerThan) {
@@ -53,6 +57,7 @@ public class PatientController {
     }
 
     @GetMapping("/add")
+    @PreAuthorize("isAuthenticated()")
     public ModelAndView displayAddPatientPage() {
         ModelAndView mav = new ModelAndView("addPatient");
         mav.addObject("newPatient", new NewPatient());
@@ -60,6 +65,7 @@ public class PatientController {
     }
 
     @PostMapping
+    @PreAuthorize("isAuthenticated()")
     public String handleAddPatient(@Valid @ModelAttribute NewPatient newPatient, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return "addPatient";

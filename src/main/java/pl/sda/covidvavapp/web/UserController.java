@@ -1,6 +1,7 @@
 package pl.sda.covidvavapp.web;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -13,6 +14,7 @@ import pl.sda.covidvavapp.web.model.NewUser;
 @Controller
 @RequestMapping("/user")
 @RequiredArgsConstructor
+@PreAuthorize("isAnonymous()")
 public class UserController {
 
     private final UserService userService;

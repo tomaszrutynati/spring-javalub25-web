@@ -1,6 +1,7 @@
 package pl.sda.covidvavapp.web;
 
 import lombok.AllArgsConstructor;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -20,6 +21,7 @@ import java.util.stream.Collectors;
 @Controller
 @RequestMapping("/vaccination")
 @AllArgsConstructor
+@PreAuthorize("isAuthenticated()")
 public class VaccinationController {
 
     private VaccinationService vaccinationService;
