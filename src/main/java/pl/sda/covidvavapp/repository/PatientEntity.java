@@ -21,7 +21,7 @@ public class PatientEntity {
     private String lastName;
     private String pesel;
     private LocalDate birthDate;
-    @OneToMany(mappedBy = "patient")
+    @OneToMany(mappedBy = "patient", cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     private Set<VaccinationEntity> vaccinations = new HashSet<>();
 
     public PatientEntity updatePatient(String newFirstName, String newLastName) {
@@ -40,12 +40,14 @@ public class PatientEntity {
                 .date(localDate)
                 .done(false)
                 .vacType(vacType)
+                .patient(this)
                 .build());
         vaccinations.add(VaccinationEntity.builder()
                 .address(address)
                 .date(localDate.plusWeeks(2))
                 .done(false)
                 .vacType(vacType)
+                .patient(this)
                 .build());
     }
 }

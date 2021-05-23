@@ -2,6 +2,7 @@ package pl.sda.covidvavapp.service;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import pl.sda.covidvavapp.api.model.NewVaccination;
 import pl.sda.covidvavapp.exception.PatientAlreadyVaccinatedException;
 import pl.sda.covidvavapp.repository.PatientEntity;
@@ -16,6 +17,7 @@ public class VaccinationService {
 
     private PatientRepository patientRepository;
 
+    @Transactional
     public void planVaccination(NewVaccination vaccination) {
         patientRepository.findById(vaccination.getPatientId()).ifPresent(patient -> {
                     if (!patient.getVaccinations().isEmpty()) {
