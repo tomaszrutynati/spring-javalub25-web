@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Vaccintation</title>
@@ -30,7 +30,7 @@
 <!--<div th:if="${patients == null or patients.isEmpty()}">-->
 <div th:unless="${patients != null and !patients.isEmpty()}">
     <h2>Brak zarejestrowanych pacjentów</h2>
-    <p><a th:href="@{/patient/add}">Dodaj pacjenta</a></p>
+    <p sec:authorize="isAuthenticated()"><a th:href="@{/patient/add}">Dodaj pacjenta</a></p>
 </div>
 <div th:replace="fragments/utils.html :: footer"></div>
 

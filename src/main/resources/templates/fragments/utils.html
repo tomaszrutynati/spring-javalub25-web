@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html"
+      xmlns:sec="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
 </head>
@@ -7,12 +8,14 @@
     <div th:fragment="navigation">
         <ul>
             <li><a th:href="@{/patient}">Pacjenci</a></li>
-            <li><a th:href="@{/patient/add}">Dodaj pacjenta</a></li>
-            <li><a th:href="@{/facility/add}">Dodaj placówkę</a></li>
-            <li><a th:href="@{/facility}">Placówki</a></li>
-            <li><a th:href="@{/vaccination}">Zaplanuj szczepienie</a></li>
-            <li><a th:href="@{/login}">Zaloguj się</a></li>
-            <li>
+            <li sec:authorize="isAuthenticated()"><a th:href="@{/patient/add}">Dodaj pacjenta</a></li>
+            <li sec:authorize="hasRole('ADMIN')"><a th:href="@{/facility/add}">Dodaj placówkę</a></li>
+            <li sec:authorize="hasRole('ADMIN')"><a th:href="@{/facility}">Placówki</a></li>
+            <li sec:authorize="isAuthenticated()"><a th:href="@{/vaccination}">Zaplanuj szczepienie</a></li>
+            <li sec:authorize="isAnonymous()"><a th:href="@{/login}">Zaloguj się</a></li>
+            <li sec:authorize="isAnonymous()"><a th:href="@{/user/registration}">Zarejestruj się</a></li>
+
+            <li sec:authorize="isAuthenticated()">
                 <form id="logout" method="post" th:action="@{/logout}">
                     <a href="#" onclick="document.getElementById('logout').submit()">Wyloguj się</a>
                 </form>
