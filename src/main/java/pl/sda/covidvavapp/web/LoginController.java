@@ -1,9 +1,14 @@
 package pl.sda.covidvavapp.web;
 
+import org.springframework.http.HttpRequest;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
+
+import javax.servlet.http.HttpServletRequest;
 
 @Controller
 @RequestMapping("/login")
@@ -11,8 +16,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class LoginController {
 
     @GetMapping
-    public String displayLoginPage() {
-        return "login";
+    public ModelAndView displayLoginPage(HttpServletRequest request) {
+        ModelAndView mav = new ModelAndView("login");
+        if (request.getParameterMap().containsKey("error")) {
+            mav.addObject("msg", "Złe dane logowania");
+        }
+        return mav;
     }
 
 }
