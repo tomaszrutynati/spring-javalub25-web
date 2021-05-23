@@ -21,6 +21,7 @@
                 </form>
             </li>
         </ul>
+        <p sec:authorize="isAuthenticated()">Jesteś zalogowany jako: <span sec:authentication="name"></span></p>
     </div>
 
     <div th:fragment="footer">
