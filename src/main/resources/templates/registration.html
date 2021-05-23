@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>Vaccintation</title>
+    <link th:href="@{/style/main.css}" rel="stylesheet"/>
+    <link rel="stylesheet" href="/webjars/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="/webjars/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div th:replace="fragments/utils.html :: navigation"></div>
+
+Zarejestruj się <br>
+<div class="container">
+    <form th:action="@{/user/registration}" th:object="${newUser}" method="post">
+        <div class="row">
+            <div class="col-2">
+                Login :
+            </div>
+            <div class="col-4">
+                <input th:field="*{username}"/>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-2">
+                Hasło :
+            </div>
+            <div class="col-4">
+                <input type="password" th:field="*{password}"/>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-2">
+                Rola :
+            </div>
+            <div class="col-4">
+                <select th:field="*{role}">
+                    <option value="ADMIN">Admin</option>
+                    <option value="USER">Użytkownik</option>
+                </select>
+            </div>
+        </div>
+
+        <br>
+        <div class="container">
+            <div class="row">
+                <div class="offset-4">
+                    <input type="submit" value="Zapisz" class="btn btn-success">
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<div th:replace="fragments/utils.html :: footer"></div>
+</body>
+</html>
